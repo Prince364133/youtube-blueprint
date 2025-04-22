@@ -17,3 +17,154 @@
     .container {
       padding: 20px;
     }
+    .course-image {
+      width: 100%;
+      max-width: 600px;
+      animation: fadeIn 2s;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    }
+    .course-details {
+      margin-top: 20px;
+      animation: fadeInText 3s;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+    }
+    .highlight {
+      color: #ff3333;
+      font-weight: bold;
+    }
+    .promo-input {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+    .btn {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 14px 28px;
+      font-size: 18px;
+      margin: 10px auto;
+      border: 2px solid #ff3c3c;
+      cursor: pointer;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      display: block;
+      width: fit-content;
+    }
+    .btn:hover {
+      background-color: #ff3333;
+    }
+    #infoBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      color: black;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    #courseBtn, #whatsappBtn {
+      display: none;
+    }
+    .read-more {
+      font-size: 14px;
+      color: #ddd;
+      margin-top: 10px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="dhruv_image.jpg" alt="Dhruv Rathee Course" class="course-image" />
+    <div class="course-details">
+      <h2>🎥 YouTube Blueprint by Dhruv Rathee</h2>
+      <p>
+        Have you ever dreamt of becoming a Youtuber? This is your blueprint to getting there.<br>
+        Whether full-time or part-time, this all-in-one course is your perfect plan.<br>
+        Learn to <span class="highlight">ideate, script, film, and edit amazing videos</span>.<br>
+        Understand the secret to gaining lakhs of followers and making money as a creator.<br>
+        <strong>📚 7.5 Hours of video content | 7 Chapters | 🗣️ Hindi with English Subtitles</strong>
+      </p>
+      <span class="read-more" onclick="showMore()">📖 Read More</span>
+      <div id="moreInfo" style="display:none; margin-top: 15px;">
+        <p>
+          Dhruv Rathee is one of India's top YouTubers with millions of followers. In this course, he shares
+          his complete journey and techniques – from content creation and storytelling to SEO, algorithm
+          strategies, audience retention and monetization. Unlock the tools to build a loyal community and
+          earn from your passion.
+        </p>
+      </div>
+      <h3 class="highlight">💸 Price: ₹500</h3>
+
+      <input type="text" id="promoCode" placeholder="🎁 Enter Promo Code" class="promo-input" />
+      <button class="btn" onclick="applyPromoCode()">Apply Code</button>
+
+      <button class="btn" id="buyNowBtn" onclick="redirectToPayment()">💳 Buy Now</button>
+      <button class="btn" id="courseBtn" onclick="window.open('https://academy.dhruvrathee.com/s/store/courses/description/YouTube-Blueprint--1677658938593', '_blank')">📂 Access Course</button>
+
+      <button class="btn" id="whatsappBtn" onclick="sendToWhatsApp()">📤 Send Screenshot on WhatsApp</button>
+    </div>
+  </div>
+
+  <div id="infoBtn" onclick="alert('ℹ️ After payment, click the WhatsApp button to send screenshot and receive the course link.')">ℹ️</div>
+
+  <script>
+    let amount = 500;
+
+    function applyPromoCode() {
+      const code = document.getElementById('promoCode').value.trim();
+
+      if (code === 'FREE364133') {
+        document.getElementById('courseBtn').style.display = 'inline-block';
+        alert('✅ Promo code applied! You can access the course now.');
+      } else {
+        alert('❌ Invalid or unrecognized promo code. Proceed to payment if not using promo.');
+      }
+    }
+
+    function redirectToPayment() {
+      const upiUrl = `upi://pay?pa=6205170591@upi&pn=SnapSiksha&am=${amount}&cu=INR`;
+      window.location.href = upiUrl;
+      setTimeout(() => {
+        document.getElementById('whatsappBtn').style.display = 'inline-block';
+        alert('📸 If you have completed the payment, send a screenshot on WhatsApp.');
+      }, 3000);
+    }
+
+    function sendToWhatsApp() {
+      const message = encodeURIComponent("Hi, I have completed the payment. Here's the screenshot.");
+      window.open(`https://wa.me/916205170591?text=${message}`, '_blank');
+    }
+
+    function showMore() {
+      const moreInfo = document.getElementById("moreInfo");
+      moreInfo.style.display = moreInfo.style.display === "none" ? "block" : "none";
+    }
+  </script>
+</body>
+</html>
