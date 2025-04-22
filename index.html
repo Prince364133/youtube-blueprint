@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Blueprint Course</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #000000, #1c1c1c);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      padding: 20px;
+      display: none;
+    }
+    .course-image {
+      width: 100%;
+      max-width: 600px;
+      animation: fadeIn 2s;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+    .course-details {
+      margin-top: 20px;
+      animation: fadeInText 3s;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+    .highlight {
+      color: #ff4d4d;
+      font-weight: bold;
+    }
+    .promo-input {
+      margin-top: 20px;
+      padding: 12px;
+      font-size: 18px;
+      width: 80%;
+      max-width: 300px;
+      border-radius: 10px;
+      border: none;
+    }
+    .btn {
+      background-color: rgba(255, 0, 0, 0.7);
+      color: white;
+      padding: 15px 25px;
+      font-size: 18px;
+      margin: 12px;
+      border: none;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn:hover {
+      background-color: #ff1a1a;
+      transform: scale(1.05);
+    }
+    #infoBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      color: black;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-weight: bold;
+      font-size: 22px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    #courseBtn, #whatsappBtn {
+      display: none;
+    }
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #ff4d4d;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeSplash 4s ease-in-out forwards;
+    }
+    @keyframes fadeSplash {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="splash">Snapsiksha Presents 🎬</div>
+
+  <audio id="bg-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container" id="main-content">
+    <img src="dhruv_image.jpg" alt="Dhruv Rathee Course" class="course-image" />
+    <div class="course-details">
+      <h2>YouTube Blueprint by Dhruv Rathee 🎥</h2>
+      <p>
+        Have you ever dreamt of becoming a Youtuber? This is your blueprint to getting there.<br>
+        Whether full-time or part-time, this all-in-one course is your perfect plan.<br>
+        Learn to <span class="highlight">ideate, script, film, and edit amazing videos</span>.<br>
+        Understand the secret to gaining lakhs of followers and making money as a creator.<br>
+        <strong>7.5 Hours of video content | 7 Chapters | Hindi with English Subtitles</strong>
+      </p>
+      <h3 class="highlight">Price: ₹500 💰</h3>
+
+      <input type="text" id="promoCode" placeholder="Enter Promo Code 🎁" class="promo-input" />
+      <br>
+      <button class="btn" onclick="applyPromoCode()">Apply Code 🔐</button>
+
+      <br>
+      <button class="btn" id="buyNowBtn" onclick="redirectToPayment()">Buy Now 💳</button>
+      <button class="btn" id="courseBtn" onclick="alert('🎉 Course Unlocked! Sending link on WhatsApp.')">Access Course 🎓</button>
+
+      <button class="btn" id="whatsappBtn" onclick="sendToWhatsApp()">📲 Send Screenshot on WhatsApp</button>
+    </div>
+  </div>
+
+  <div id="infoBtn" onclick="showInfo()">i</div>
+
+  <script>
+    let amount = 500;
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('splash').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+
+        const audio = document.getElementById("bg-music");
+        audio.play().catch(e => console.warn("Autoplay prevented. User gesture needed."));
+
+        const msg = new SpeechSynthesisUtterance("Welcome to Snapsiksha. Enjoy your course journey with Dhruv Rathee.");
+        window.speechSynthesis.speak(msg);
+      }, 4000);
+    });
+
+    function applyPromoCode() {
+      const code = document.getElementById('promoCode').value.trim();
+
+      if (code === 'FREE364133') {
+        document.getElementById('courseBtn').style.display = 'inline-block';
+        alert('✅ Promo code applied! Course unlocked for FREE.');
+      } else {
+        alert('❌ Invalid promo code. Proceed to payment if not using a promo.');
+      }
+    }
+
+    function redirectToPayment() {
+      const code = document.getElementById('promoCode').value.trim();
+      if (code === 'FREE364133') {
+        alert('✅ No payment required. Click "Access Course" to proceed.');
+        return;
+      }
+      const upiUrl = `upi://pay?pa=6205170591@upi&pn=SnapSiksha&am=${amount}&cu=INR`;
+      window.location.href = upiUrl;
+      setTimeout(() => {
+        document.getElementById('whatsappBtn').style.display = 'inline-block';
+        alert('📩 After payment, send screenshot on WhatsApp to receive the course link.');
+      }, 3000);
+    }
+
+    function sendToWhatsApp() {
+      const message = encodeURIComponent("Hi, I have completed the payment. Here's the screenshot.");
+      window.open(`https://wa.me/916205170591?text=${message}`, '_blank');
+    }
+
+    function showInfo() {
+      alert('ℹ️ After payment, click the WhatsApp button to send a screenshot and get your course link.');
+    }
+  </script>
+</body>
+</html>
 
